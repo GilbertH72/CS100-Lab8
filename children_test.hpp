@@ -17,6 +17,7 @@ TEST(ChildrenTest, AddChild) {
    EXPECT_EQ(test->number_of_children(), 2);
    EXPECT_EQ(test->get_child(0), op1);
    EXPECT_EQ(test->get_child(1), op2);
+   delete test;
 }
 
 TEST(ChildrenTest, MultChild) {
@@ -26,6 +27,7 @@ TEST(ChildrenTest, MultChild) {
    EXPECT_EQ(test->number_of_children(), 2);
    EXPECT_EQ(test->get_child(0), op1);
    EXPECT_EQ(test->get_child(1), op2);
+   delete test;
 }
 
 TEST(ChildrenTest, DivChild) {
@@ -35,6 +37,7 @@ TEST(ChildrenTest, DivChild) {
    EXPECT_EQ(test->number_of_children(), 2);
    EXPECT_EQ(test->get_child(0), op1);
    EXPECT_EQ(test->get_child(1), op2);
+   delete test;
 }
 
 TEST(ChildrenTest, SubChild) {
@@ -44,6 +47,7 @@ TEST(ChildrenTest, SubChild) {
    EXPECT_EQ(test->number_of_children(), 2);
    EXPECT_EQ(test->get_child(0), op1);
    EXPECT_EQ(test->get_child(1), op2);
+   delete test;
 }
 
 TEST(ChildrenTest, PowChild) {
@@ -53,6 +57,7 @@ TEST(ChildrenTest, PowChild) {
    EXPECT_EQ(test->number_of_children(), 2);
    EXPECT_EQ(test->get_child(0), op1);
    EXPECT_EQ(test->get_child(1), op2);
+   delete test;
 }
 
 
