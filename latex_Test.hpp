@@ -16,157 +16,98 @@
 
 using namespace std;
 
-TEST(LaTeX, test1)
+TEST(VisitorLatexTest, test1)
 {
-    Base* one = new Op(1);
-    Base* five = new Op(5);
-    Base* zero = new Op(0);
-    Sub* sub = new Sub(five, zero);
-    Add* add = new Add(one, sub);
-    
-    Iterator* it = new Iterator(add);
-    VisitorLaTeX v;
-        
-    while(!it -> is_done())
-    {
-        if(it -> current_node() != NULL)
-        {
-            it -> current_node() -> accept(&v, it -> current_index());
-            it -> next();
-        }
-    }
-    
-    cout << endl;
-    cout << "Printing latex: " << v.PrintLaTeX(add) << endl;
-    
-    EXPECT_EQ(v.PrintLaTeX(add), "${({1}+{({5}-{0})})}$");
+   Base* two = new Op(2);
+   Base* six = new Op(6);
+   Base* zero = new Op(0);
+   Sub* sub = new Sub(six, zero);
+   Add* add = new Add(two, sub);
 
-    delete one;
-    delete five;
-    delete zero;
-    delete sub;
-    delete add;
-    delete it;
+   Iterator* it = new Iterator(add);
+   VisitorLaTeX v;
+
+   while (!it->is_done())
+   {
+      if (it->current_node() != NULL)
+      {
+         it->current_node()->accept(&v, it->current_index());
+         it->next();
+      }
+   }
+
+   EXPECT_EQ(v.PrintLaTeX(add), "${({2}+{({6}-{0})})}$");
+   delete add;
+   delete it;
 }
 
-TEST(LaTeX, test2)
+TEST(VisitorLatexTest, test2)
 {
-    Base* five = new Op(5);
-    Base* two = new Op(2);
-    Pow* pow = new Pow(five, two);
-    
-    Iterator* it = new Iterator(pow);
-    VisitorLaTeX v;
-        
-    while(!it -> is_done())
-    {
-        if(it -> current_node() != NULL)
-        {
-            it -> current_node() -> accept(&v, it -> current_index());
-            it -> next();
-        }
-    }
-    
-    cout << endl;
-    cout << "Printing latex: " << v.PrintLaTeX(pow) << endl;
-    
-    EXPECT_EQ(v.PrintLaTeX(pow), "${({5}^{2})}$");
+   Base* seven = new Op(7);
+   Base* three = new Op(3);
+   Pow* pow = new Pow(seven, three);
 
-    delete two;
-    delete five;
-    delete pow;
-    delete it;
+   Iterator* it = new Iterator(pow);
+   VisitorLaTeX v;
+
+   while (!it->is_done())
+   {
+      if (it->current_node() != NULL)
+      {
+         it->current_node()->accept(&v, it->current_index());
+         it->next();
+      }
+   }
+
+   EXPECT_EQ(v.PrintLaTeX(pow), "${({7}^{3})}$");
+   delete pow;
+   delete it;
 }
 
-TEST(LaTeX, test3)
+TEST(VisitorLatexTest, test3)
 {
-    Base* two = new Op(2);
-    Base* five = new Op(5);
-    Mult* mult = new Mult(two, five);
-    
-    Iterator* it = new Iterator(mult);
-    VisitorLaTeX v;
-        
-    while(!it -> is_done())
-    {
-        if(it -> current_node() != NULL)
-        {
-            it -> current_node() -> accept(&v, it -> current_index());
-            it -> next();
-        }
-    }
-    
-    cout << endl;
-    cout << "Printing latex: " << v.PrintLaTeX(mult) << endl;
-    
-    EXPECT_EQ(v.PrintLaTeX(mult), "${({2}\\cdot{5})}$");
+   Base* eight = new Op(8);
+   Base* four = new Op(4);
+   Mult* mult = new Mult(four, eight);
 
-    delete two;
-    delete five;
-    delete mult;
-    delete it;
+   Iterator* it = new Iterator(mult);
+   VisitorLaTeX v;
+
+   while (!it->is_done())
+   {
+      if (it->current_node() != NULL)
+      {
+         it->current_node()->accept(&v, it->current_index());
+         it->next();
+      }
+   }
+
+   EXPECT_EQ(v.PrintLaTeX(mult), "${({4}\\cdot{8})}$");
+   delete mult;
+   delete it;
 }
 
-TEST(LaTeX, test4)
+TEST(VisitorLatexTest, test4)
 {
-    Base* two = new Op(2);
-    Base* three = new Op(3);
-    Div* div = new Div(two, three);
-    
-    Iterator* it = new Iterator(div);
-    VisitorLaTeX v;
-        
-    while(!it -> is_done())
-    {
-        if(it -> current_node() != NULL)
-        {
-            it -> current_node() -> accept(&v, it -> current_index());
-            it -> next();
-        }
-    }
-    
-    cout << endl;
-    cout << "Printing latex: " << v.PrintLaTeX(div) << endl;
-    
-    EXPECT_EQ(v.PrintLaTeX(div), "${\\frac{2}{3}}$");
+   Base* nine = new Op(9);
+   Base* three = new Op(3);
+   Div* div = new Div(nine, three);
 
-    delete two;
-    delete three;
-    delete div;
-    delete it;
-}
+   Iterator* it = new Iterator(div);
+   VisitorLaTeX v;
 
-TEST(LaTeX, test5)
-{
-    Base* two = new Op(2);
-    Base* five = new Op(5);
-    Mult* mult = new Mult(two, five);
-    Pow* pow = new Pow(five, two);
-    Div* div = new Div(mult, pow);
-    
-    Iterator* it = new Iterator(div);
-    VisitorLaTeX v;
-        
-    while(!it -> is_done())
-    {
-        if(it -> current_node() != NULL)
-        {
-            it -> current_node() -> accept(&v, it -> current_index());
-            it -> next();
-        }
-    }
-    
-    cout << endl;
-    cout << "Printing latex: " << v.PrintLaTeX(div) << endl;
-    
-    EXPECT_EQ(v.PrintLaTeX(div), "${\\frac{({2}\\cdot{5})}{({5}^{2})}}$");
+   while (!it->is_done())
+   {
+      if (it->current_node() != NULL)
+      {
+         it->current_node()->accept(&v, it->current_index());
+         it->next();
+      }
+   }
 
-    delete two;
-    delete five;
-    delete mult;
-    delete pow;
-    delete div;
-    delete it;
+   EXPECT_EQ(v.PrintLaTeX(div), "${\\frac{9}{3}}$");
+   delete div;
+   delete it;
 }
 
 #endif // LATEX_TEST_HPP
