@@ -3,6 +3,7 @@
 
 #include "base.hpp"
 #include "op.hpp"
+#include "visitor.hpp"
 #include <iostream>
 #include <cmath>
 
@@ -25,16 +26,19 @@ public:
       std::string oss_value = oss.str();
       return oss_value;
    }
-   int number_of_children() {
-      return 2;
-   }
-   Base* get_child(int i) {
+   virtual int number_of_children() { return 2; }
+   virtual Base* get_child(int i) {
       if (i == 0) {
          return op_1;
       }
       else {
          return op_2;
       }
+   }
+   virtual void accept(Visitor* visitor, int index) {
+      if (index == 0) { visitor->visit_pow_begin(this); }
+      else if (index == 1) { visitor->visit_pow_middle(this); }
+      else { visitor->visit_pow_end(this); }
    }
 
 private:
