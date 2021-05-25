@@ -27,7 +27,7 @@ public:
    }
    virtual int number_of_children() { return 2; }
    virtual Base* get_child(int i) {
-      if (int i = 0) {
+      if (int i == 0) {
          return op_1;
       }
       else {
