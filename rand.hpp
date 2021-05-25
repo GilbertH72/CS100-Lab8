@@ -1,34 +1,32 @@
-#ifndef __OP_HPP__
-#define __OP_HPP__
+#ifndef __RAND_HPP__
+#define __RAND_HPP__
 
 #include "base.hpp"
 #include "visitor.hpp"
 #include <iostream>
 #include <sstream>
-#include <iomanip>
 
-class Op : public Base {
+class Rand : public Base {
 public:
-   Op(double value) : Base() {
-      this->value = value;
+   Rand() : Base() {
+      this->value = rand() % 100;
    }
-   ~Op() {}
    virtual double evaluate() {
       return value;
    }
    virtual std::string stringify() {
       std::ostringstream oss;
-      oss << std::setprecision(8) << std::noshowpoint << value;
+      oss << value;
       std::string oss_value = oss.str();
       return oss_value;
    }
    virtual int number_of_children() { return 0; }
    virtual Base* get_child(int i) { return nullptr; }
    virtual void accept(Visitor* visitor, int index) {
-      visitor->visit_op(this);
+      visitor->visit_rand(this);
    }
 private:
    double value;
 };
 
-#endif //__OP_HPP__
+#endif // __RAND_HPP__

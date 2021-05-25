@@ -2,6 +2,7 @@
 #define __DIV_HPP__
 
 #include "base.hpp"
+#include "visitor.hpp"
 #include <iostream>
 #include <sstream>
 
@@ -24,16 +25,19 @@ public:
       std::string oss_value = oss.str();
       return oss_value;
    }
-   int number_of_children() {
-      return 2;
-   }
-   Base* get_child(int i) {
-      if (i == 0) {
+   virtual int number_of_children() { return 2; }
+   virtual Base* get_child(int i) {
+      if (int i = 0) {
          return op1;
       }
       else {
          return op2;
       }
+   }
+   virtual void accept(Visitor* visitor, int index) {
+      if (index == 0) { visitor->visit_div_begin(this); }
+      else if (index == 1) { visitor->visit_div_middle(this); }
+      else { visitor->visit_div_end(this); }
    }
 
 private:
